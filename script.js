@@ -19,7 +19,7 @@ fetch('data.tsv')
         parsedRows.sort((a, b) => {
             const aSubscribers = parseInt(a[1], 10); // Convert to number
             const bSubscribers = parseInt(b[1], 10);
-            return aSubscribers - bSubscribers; // Ascending order
+            return bSubscribers - aSubscribers; // Descending order
         });
 
         // Create the table
