@@ -1,5 +1,5 @@
 // Fetch the TSV file
-fetch('data.tsv')
+fetch('data2.tsv')
     .then(response => response.text())
     .then(data => {
         const rows = data.split('\n'); // Split into lines
