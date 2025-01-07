@@ -1,4 +1,4 @@
-fetch('data2.tsv')
+fetch('data.tsv')
     .then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -11,6 +11,16 @@ fetch('data2.tsv')
 
         // Add a new "Number" column at the start
         headers.unshift('#');
+
+        // Parse rows into an array of arrays
+        const parsedRows = rows.map(row => row.split('\t')).filter(row => row.length > 1);
+
+        // Sort rows by the "Subscribers" column (index 1)
+        parsedRows.sort((a, b) => {
+            const aSubscribers = parseInt(a[1], 10); // Convert to number
+            const bSubscribers = parseInt(b[1], 10);
+            return aSubscribers - bSubscribers; // Ascending order
+        });
 
         // Create the table
         const table = document.getElementById('data-table');
@@ -28,8 +38,7 @@ fetch('data2.tsv')
 
         // Add the rows
         const tbody = document.createElement('tbody');
-        rows.forEach((row, index) => {
-            if (row.trim() === '') return; // Skip empty rows
+        parsedRows.forEach((row, index) => {
             const dataRow = document.createElement('tr');
 
             // Add the row number as the first column
@@ -38,7 +47,7 @@ fetch('data2.tsv')
             dataRow.appendChild(numberCell);
 
             // Add the remaining cells
-            row.split('\t').forEach(cell => {
+            row.forEach(cell => {
                 const td = document.createElement('td');
                 td.textContent = cell.trim();
                 dataRow.appendChild(td);
