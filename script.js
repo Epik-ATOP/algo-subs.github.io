@@ -7,7 +7,7 @@ fetch('data.tsv')
     })
     .then(data => {
         const rows = data.split('\n'); // Split into lines
-        const headers = rows.shift().split('\t'); // Get column headers
+        const headers = rows.shift().split('\t'); // Extract column headers
 
         // Add a new "Number" column at the start
         headers.unshift('#');
