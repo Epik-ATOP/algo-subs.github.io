@@ -12,13 +12,25 @@ fetch('data.tsv')
         // Add a new "Number" column at the start
         headers.unshift('#');
 
+        // Map country names to country codes
+        const countryToCode = {
+            'Japan': 'jp',
+            'USA': 'us',
+            'UK': 'gb',
+            'South Korea': 'kr',
+            'Thailand': 'th',
+            'Ukraine': 'ua',
+            'Italy': 'it',
+            'South Africa': 'za'
+        };
+
         // Parse rows into an array of arrays
         const parsedRows = rows.map(row => row.split('\t')).filter(row => row.length > 1);
 
         // Sort rows by the "Subscribers" column (index 1)
         parsedRows.sort((a, b) => {
-            const aSubscribers = parseInt(a[1], 10); // Convert to number
-            const bSubscribers = parseInt(b[1], 10);
+            const aSubscribers = parseInt(a[1].replace(/,/g, ''), 10);
+            const bSubscribers = parseInt(b[1].replace(/,/g, ''), 10);
             return bSubscribers - aSubscribers; // Descending order
         });
 
@@ -47,9 +59,29 @@ fetch('data.tsv')
             dataRow.appendChild(numberCell);
 
             // Add the remaining cells
-            row.forEach(cell => {
+            row.forEach((cell, cellIndex) => {
                 const td = document.createElement('td');
-                td.textContent = cell.trim();
+
+                // Add flags to the "Location" column (last column)
+                if (cellIndex === row.length - 1) {
+                    const countryName = cell.trim();
+                    const countryCode = countryToCode[countryName]; // Get country code
+                    if (countryCode) {
+                        // Add a flag using an img tag
+                        const flagImg = document.createElement('img');
+                        flagImg.src = `https://flagcdn.com/w40/${countryCode}.png`; // Flag URL
+                        flagImg.alt = `${countryName} flag`;
+                        flagImg.style.width = '20px';
+                        flagImg.style.marginRight = '8px';
+
+                        // Append flag image before country name
+                        td.appendChild(flagImg);
+                    }
+                    td.textContent += countryName; // Add country name
+                } else {
+                    td.textContent = cell.trim();
+                }
+
                 dataRow.appendChild(td);
             });
             tbody.appendChild(dataRow);
