@@ -7,7 +7,7 @@ fetch('data2.tsv')
     })
     .then(data => {
         const rows = data.split('\n'); // Split into lines
-        const headers = rows.shift().split('\t'); // Get column headers
+        const headers = rows.shift().split('\t'); // Extract column headers
 
         // Add a new "Number" column at the start
         headers.unshift('#');
@@ -19,7 +19,7 @@ fetch('data2.tsv')
         parsedRows.sort((a, b) => {
             const aSubscribers = parseInt(a[1], 10); // Convert to number
             const bSubscribers = parseInt(b[1], 10);
-            return bSubscribers - aSubscribers; // Descending order
+            return aSubscribers - bSubscribers; // Ascending order
         });
 
         // Create the table
