@@ -21,7 +21,26 @@ fetch('data.tsv')
             'Thailand': 'th',
             'Ukraine': 'ua',
             'Italy': 'it',
-            'South Africa': 'za'
+            'South Africa': 'za',
+            'Canada': 'ca',
+            'Australia': 'au',
+            'Germany': 'de',
+            'France': 'fr',
+            'Spain': 'es',
+            'Russia': 'ru',
+            'Brazil': 'br',
+            'India': 'in',
+            'China': 'cn',
+            'Mexico': 'mx',
+            'Indonesia': 'id',
+            'Vietnam': 'vn',
+            'Philippines': 'ph',
+            'Malaysia': 'my',
+            'Turkey': 'tr',
+            'Nigeria': 'ng',
+            'Egypt': 'eg',
+            'Saudi Arabia': 'sa',
+            'Iran': 'ir',
         };
 
         // Parse rows into an array of arrays
@@ -74,7 +93,7 @@ fetch('data.tsv')
                     if (countryCode) {
                         // Add a flag using an img tag
                         const flagImg = document.createElement('img');
-                        flagImg.src = `https://flagcdn.com/w40/${countryCode}.png`; // Flag URL
+                        flagImg.src = `https://flagpedia.net/data/flags/h40/${countryCode}.png`; // Flag URL
                         flagImg.alt = `${countryName} flag`;
                         flagImg.style.width = '20px';
                         flagImg.style.marginRight = '8px';
