@@ -94,6 +94,19 @@ function getCountryCode(country) {
         "Ukraine": "ua",
         "Thailand": "th",
         "South Africa": "za",
+        "Russia": "ru",
+        "Poland": "pl",
+        "Philippines": "ph",
+        "Nigeria": "ng",
+        "Mexico": "mx",
+        "Malaysia": "my",
+        "India": "in",
+        "Germany": "de",
+        "France": "fr",
+        "Egypt": "eg",
+        "Canada": "ca",
+        "Brazil": "br",
+        "Australia": "au"
     };
     return countryCodes[country] || '';
 }
