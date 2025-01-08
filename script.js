@@ -22,6 +22,7 @@ fetch('data.tsv')
             'Ukraine': 'ua',
             'Italy': 'it',
             'South Africa': 'za',
+            'South Africa': 'za',
             'Australia': 'au',
             'Canada': 'ca',
             'Germany': 'de',
@@ -83,8 +84,13 @@ fetch('data.tsv')
             row.forEach((cell, cellIndex) => {
                 const td = document.createElement('td');
 
+                // Format "Subscribers" column with commas (column index 1)
+                if (cellIndex === 1) {
+                    const subscribers = parseInt(cell.trim(), 10); // Parse as number
+                    td.textContent = subscribers.toLocaleString(); // Format with commas
+                }
                 // Add flags to the "Location" column (last column)
-                if (cellIndex === row.length - 1) {
+                else if (cellIndex === row.length - 1) {
                     const countryName = cell.trim();
                     const countryCode = countryToCode[countryName]; // Get country code
                     if (countryCode) {
