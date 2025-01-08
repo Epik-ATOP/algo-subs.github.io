@@ -62,8 +62,13 @@ fetch('data.tsv')
             row.forEach((cell, cellIndex) => {
                 const td = document.createElement('td');
 
+            if (cellIndex === 1) {
+                const subscribers = parseInt(cell.trim(), 10);
+                td.textContent = subscribers.toLocaleString(); // Format number with commas
+            }
+
                 // Add flags to the "Location" column (last column)
-                if (cellIndex === row.length - 1) {
+                else if (cellIndex === row.length - 1) {
                     const countryName = cell.trim();
                     const countryCode = countryToCode[countryName]; // Get country code
                     if (countryCode) {
